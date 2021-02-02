@@ -1,3 +1,4 @@
+
 const http = require('http');
 const fs = require('fs');
 
@@ -7,9 +8,16 @@ const server = http.createServer((req,res) => {
 
     if (req.url == '/'){
         urldir += 'index.html';
+    }else if (req.url == '/about'){
+        urldir += 'about.html';
+    }else if (req.url == '/contact'){
+        urldir += 'contact.html';
+    }else{
+        urldir += '404.html';
     }
 
-    fs.readFile(urldir, (err, data) => {
+    // console.log(urldir);
+    fs.readFile(urldir, 'utf8', (err, data) => {
         if (err){
             console.log(err);
             res.end();
@@ -20,5 +28,5 @@ const server = http.createServer((req,res) => {
 });
 
 server.listen(3000, 'localhost', () => {
-    console.log('listening');
+    console.log('HTTP server is up');
 });
